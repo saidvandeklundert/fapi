@@ -16,6 +16,12 @@ def give_number():
 # http://127.0.0.1/api/calculate?x=2&y=8&z=10
 @api.get("/api/calculate")
 def sum(x: int, y: int, z: Optional[int] = None):
+    if not str(z).isdigit():
+        return fastapi.Response(
+            content='{ "error" : "ERROR: z cannot be a digit" ',
+            media_type="application/json",
+            status_code=400,
+        )
     ret = {"x": x, "y": y, "z": z}
     value = x + y
     if z:
