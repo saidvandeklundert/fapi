@@ -18,13 +18,13 @@ def give_number():
 def sum(x: int, y: int, z: Optional[int] = None):
     if z and z == 20:
         return fastapi.Response(
-            content='{ "error" : "ERROR: z cannot be bigger then 100"}',
+            content='{ "error" : "ERROR: z cannot be 20"}',
             media_type="application/json",
             status_code=400,
         )
     elif z and z == 30:
         return fastapi.responses.JSONResponse(
-            content={"error": "ERROR: z cannot be bigger then 100"}, status_code=400
+            content={"error": "ERROR: z cannot be 30"}, status_code=400
         )
 
     ret = {"x": x, "y": y, "z": z}
