@@ -13,8 +13,10 @@ def give_number():
 
 # http://127.0.0.1/api/calculate?x=2&y=8
 @api.get("/api/calculate")
-def sum(x: int, y: int):
+def sum(x: int, y: int, z: Optional[int] = None):
     value = x + y
+    if z:
+        value += z
     return {"value": value}
 
 
