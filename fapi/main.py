@@ -10,4 +10,4 @@ def sum():
     return 2 + 2
 
 
-uvicorn.run(api, port=80)
+uvicorn.run(api, port=8000)
