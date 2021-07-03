@@ -55,4 +55,5 @@ def sum(x: int, y: int, z: Optional[int] = None):
 
 
 if __name__ == "__main__":
+    configure()
     uvicorn.run(api, port=80, host="0.0.0.0")
