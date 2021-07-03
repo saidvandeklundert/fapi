@@ -8,7 +8,7 @@ from starlette.staticfiles import StaticFiles
 api = fastapi.FastAPI()
 templates = Jinja2Templates("templates")
 api.mount("/static", StaticFiles(directory="static"), name="static")
-api.include_router(some_endpoints.router)
+api.include_router(weather_api.router)
 # swagger
 # http://127.0.0.1/docs
 
