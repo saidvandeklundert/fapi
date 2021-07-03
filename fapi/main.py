@@ -1,9 +1,18 @@
 import fastapi
+from starlette.requests import Request
 import uvicorn
 from typing import Optional
+from starlette.templating import Jinja2Templates
 
 api = fastapi.FastAPI()
-print("hello fast api")
+
+templates = Jinja2Templates("templates")
+
+# http://127.0.0.1/
+@api.get("/")
+def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
 
 # http://127.0.0.1/api/number
 @api.get("/api/number")

@@ -8,8 +8,7 @@ docker start 0db0781dc5ff
 docker exec -it 0db0781dc5ff /bin/sh
 yum install python39
 python3 -m venv fapi
-. fapi/bin/activate
-source fapi/bin/activate
+source /fapi/bin/activate
 which python
 python3 -m pip install --upgrade pip
 ```
