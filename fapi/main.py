@@ -4,15 +4,16 @@ import uvicorn
 api = fastapi.FastAPI()
 print("hello fast api")
 
-
+# http://127.0.0.1/api/number
 @api.get("/api/number")
 def give_number():
     value = 2 + 2
     return {"value": value}
 
 
+# http://127.0.0.1/api/calculate?x=2&y=8
 @api.get("/api/calculate")
-def sum(x, y):
+def sum(x: int, y: int):
     value = x + y
     return {"value": value}
 
