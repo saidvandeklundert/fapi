@@ -1,3 +1,11 @@
+"""
+in main:
+    from api import multiplications
+    api.include_router(multiplications.router)
+in here:
+    import fastapo
+    router = fastapi.APIRouter()
+"""
 import fastapi
 
 router = fastapi.APIRouter()
