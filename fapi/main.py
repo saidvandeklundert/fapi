@@ -5,8 +5,8 @@ from typing import Optional
 from starlette.templating import Jinja2Templates
 
 api = fastapi.FastAPI()
-
 templates = Jinja2Templates("templates")
+api.mount("/static", StaticFiles(directory="static"), name="static")
 # swagger
 # http://127.0.0.1/docs
 
