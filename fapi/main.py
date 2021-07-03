@@ -17,7 +17,7 @@ def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@api.get("/favicon.icp")
+@api.get("/favicon.ico")
 def favicon():
     return fastapi.responses.RedirectResponse(url="/static/img/ma_face.jpeg")
 
