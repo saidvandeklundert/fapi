@@ -7,7 +7,8 @@ print("hello fast api")
 
 @api.get("/api/calculate")
 def sum():
-    return 2 + 2
+    value = 2 + 2
+    return {"value": value}
 
 
 uvicorn.run(api, port=80)
