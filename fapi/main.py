@@ -8,9 +8,16 @@ from views import home
 from api import multiplications
 
 api = fastapi.FastAPI()
-api.mount("/static", StaticFiles(directory="static"), name="static")
-api.include_router(multiplications.router)
-api.include_router(home.router)
+
+
+def configure():
+    configure_routing()
+
+
+def configure_routing():
+    api.mount("/static", StaticFiles(directory="static"), name="static")
+    api.include_router(multiplications.router)
+    api.include_router(home.router)
 
 
 # swagger
@@ -47,4 +54,5 @@ def sum(x: int, y: int, z: Optional[int] = None):
     return ret
 
 
-uvicorn.run(api, port=80, host="0.0.0.0")
+if __name__ == "__main__":
+    uvicorn.run(api, port=80, host="0.0.0.0")
