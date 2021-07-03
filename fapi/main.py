@@ -17,6 +17,11 @@ def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+@api.get("/favicon.icp")
+def favicon():
+    return fastapi.responses.RedirectResponse(url="/static/img/ma_face.jpeg")
+
+
 # http://127.0.0.1/api/number
 @api.get("/api/number")
 def give_number():
