@@ -17,7 +17,6 @@ def give_number():
 @api.get("/api/calculate")
 def sum(x: int, y: int, z: Optional[int] = None):
     ret = {"x": x, "y": y, "z": z}
-    value = ret["value"]
     value = x + y
     if z:
         value += z
