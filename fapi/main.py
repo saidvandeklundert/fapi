@@ -5,6 +5,7 @@ import uvicorn
 from starlette.staticfiles import StaticFiles
 from views import home
 from api import math_and_numbers
+from api import strings_and_stuff
 
 api = fastapi.FastAPI()
 
@@ -16,6 +17,7 @@ def configure():
 def configure_routing():
     api.mount("/static", StaticFiles(directory="static"), name="static")
     api.include_router(math_and_numbers.router)
+    api.include_router(strings_and_stuff.router)
     api.include_router(home.router)
 
 
