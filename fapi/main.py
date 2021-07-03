@@ -5,10 +5,12 @@ from typing import Optional
 from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 
+from api import multiplications
+
 api = fastapi.FastAPI()
 templates = Jinja2Templates("templates")
 api.mount("/static", StaticFiles(directory="static"), name="static")
-api.include_router(weather_api.router)
+api.include_router(multiplications.router)
 # swagger
 # http://127.0.0.1/docs
 
