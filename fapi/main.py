@@ -3,6 +3,7 @@ from starlette.requests import Request
 import uvicorn
 from typing import Optional
 from starlette.templating import Jinja2Templates
+from starlette.staticfiles import StaticFiles
 
 api = fastapi.FastAPI()
 templates = Jinja2Templates("templates")
