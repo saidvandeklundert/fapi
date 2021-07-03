@@ -7,6 +7,8 @@ from starlette.templating import Jinja2Templates
 api = fastapi.FastAPI()
 
 templates = Jinja2Templates("templates")
+# swagger
+# http://127.0.0.1/docs
 
 # http://127.0.0.1/
 @api.get("/")
