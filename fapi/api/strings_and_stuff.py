@@ -1,8 +1,14 @@
 import fastapi
+from fastapi import BackgroundTasks
 import time
 import asyncio
 
 router = fastapi.APIRouter()
+
+
+def background_word(word: str):
+    print(word)
+    time.sleep(8)
 
 
 # http://127.0.0.1/api/words/upper/{word}
@@ -29,13 +35,10 @@ async def asyncword(word: str, second_word: str = "default"):
 
 
 # http://127.0.0.1/api/words/backgrounword/{word}?second_word=secondword
-@router.get("/api/words/backgrounword/{word}")
-async def backgrounword(word: str, second_word: str = "default"):
+@router.post("/api/words/backgrounword/{word}")
+async def backgrounword(
+    word: str, second_word: str = "default", background_tasks: BackgroundTasks
+):
 
-    fastapi.BackgroundTasks.add_task(background_word, word=word)
+    background_tasks.add_task(background_word, word)
     return f"{word} 2nd word {second_word}"
-
-
-def background_word(word):
-    print(word)
-    time.sleep(8)
