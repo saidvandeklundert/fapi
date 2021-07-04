@@ -22,7 +22,7 @@ def word(word: str, second_word: str = "default"):
 
 
 # http://127.0.0.1/api/words/asyncword/{word}?second_word=secondword
-@router.get("/api/words/word/{word}")
+@router.get("/api/words/asyncword/{word}")
 async def asyncword(word: str, second_word: str = "default"):
     await asyncio.sleep(2)
     return f"{word} 2nd word {second_word}"
