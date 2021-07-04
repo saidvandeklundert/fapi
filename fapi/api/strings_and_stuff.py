@@ -26,3 +26,16 @@ def word(word: str, second_word: str = "default"):
 async def asyncword(word: str, second_word: str = "default"):
     await asyncio.sleep(2)
     return f"{word} 2nd word {second_word}"
+
+
+# http://127.0.0.1/api/words/backgrounword/{word}?second_word=secondword
+@router.get("/api/words/backgrounword/{word}")
+async def backgrounword(word: str, second_word: str = "default"):
+
+    fastapi.BackgroundTasks.add_task(background_word, word=word)
+    return f"{word} 2nd word {second_word}"
+
+
+def background_word(word):
+    print(word)
+    time.sleep(8)
