@@ -1,5 +1,4 @@
 import fastapi
-
 import uvicorn
 
 from starlette.staticfiles import StaticFiles

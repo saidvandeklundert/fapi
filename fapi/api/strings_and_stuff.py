@@ -1,5 +1,6 @@
 import fastapi
 import time
+import asyncio
 
 router = fastapi.APIRouter()
 
@@ -17,4 +18,11 @@ def upper(word: str):
 @router.get("/api/words/word/{word}")
 def word(word: str, second_word: str = "default"):
     time.sleep(8)
+    return f"{word} 2nd word {second_word}"
+
+
+# http://127.0.0.1/api/words/asyncword/{word}?second_word=secondword
+@router.get("/api/words/word/{word}")
+async def asyncword(word: str, second_word: str = "default"):
+    await asyncio.sleep(2)
     return f"{word} 2nd word {second_word}"
