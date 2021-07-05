@@ -7,8 +7,8 @@ import time
 router = fastapi.APIRouter()
 
 
-# http://127.0.0.1/api/words/backgroundword/backgroundtask
-@router.post("/api/words/backgroundword/{words}")
+# http://127.0.0.1/api/threading/background/word
+@router.post("/api/threading/background/{words}")
 async def backgroundword(words: str, background_tasks: BackgroundTasks):
 
     background_tasks.add_task(background_word, words)
