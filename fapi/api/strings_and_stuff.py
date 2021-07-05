@@ -1,7 +1,9 @@
 import fastapi
 from fastapi import BackgroundTasks
 import time
+from concurrent.futures import ThreadPoolExecutor
 import asyncio
+
 
 router = fastapi.APIRouter()
 
@@ -37,7 +39,36 @@ async def backgroundword(words: str, background_tasks: BackgroundTasks):
 
 
 def background_word(words: str):
-    time.sleep(30)
+    futures = example_threadpool()
+    s = ""
+    for item in futures:
+        s += item.result()
     with open("/var/log/log.txt", mode="w") as words_file:
-        content = f"{words}"
+        content = f"{words} {s}"
         words_file.write(content)
+
+
+def io_bound_function(parameter):
+    """
+    Simulates an IO-bound function using time.sleep(3).
+    """
+    print(f"io_bound_function called with argument {parameter}")
+    time.sleep(3)
+    print(f"io_bound_function with argument {parameter} ended")
+    return parameter
+
+
+def example_threadpool():
+    """
+    Example where a function that requires an arg
+     is passed to a ThreadPoolExecutor.
+    In this case, the 'max_workers' is configurable.
+    """
+
+    futures = []
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        argument_list = ["a", "b", "c"]
+        for argument in argument_list:
+            futures.append(executor.submit(io_bound_function, argument))
+
+    return futures
