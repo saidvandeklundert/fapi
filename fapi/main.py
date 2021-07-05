@@ -18,8 +18,8 @@ def configure_routing():
     api.mount("/static", StaticFiles(directory="static"), name="static")
     api.include_router(math_and_numbers.router)
     api.include_router(strings_and_stuff.router)
-    api.include_router(home.router)
     api.include_router(threading_endpoint.router)
+    api.include_router(home.router)
 
 
 # swagger
