@@ -21,6 +21,9 @@ async def backgroundword(word: str, background_tasks: BackgroundTasks):
 
 
 def back_ground_func(word: str):
+    """
+    Start a few threads in the background.
+    """
     futures = threading(word)
 
     for item in futures:
@@ -31,12 +34,12 @@ def io_bound_function(host: str, word: str):
     """
     Simulates an IO-bound function using time.sleep(3).
     """
-    print(f"io_bound_function called with argument {word}")
+    print(f"io_bound_function called against {host} with argument {word}")
     time.sleep(3)
     with open("/var/log/log.txt", mode="a") as words_file:
         content = f"{host}: command {word}\n"
         words_file.write(content)
-    print(f"io_bound_function with argument {word} ended")
+    print(f"io_bound_function against {host} with argument {word} ended")
     return True
 
 
