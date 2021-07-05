@@ -8,9 +8,8 @@ router = fastapi.APIRouter()
 
 """
 curl -X 'POST' \
-'http://127.0.0.1/api/threading/background/1' \
+"http://127.0.0.1/api/threading/background/show%20running-config" \
 -H 'accept: application/json'   -d ''
-
 """
 
 
@@ -32,12 +31,12 @@ def io_bound_function(host: str, word: str):
     """
     Simulates an IO-bound function using time.sleep(3).
     """
-    print(f"io_bound_function called with argument {host}")
+    print(f"io_bound_function called with argument {word}")
     time.sleep(3)
     with open("/var/log/log.txt", mode="a") as words_file:
         content = f"{host}: command {word}\n"
         words_file.write(content)
-    print(f"io_bound_function with argument {host} ended")
+    print(f"io_bound_function with argument {word} ended")
     return True
 
 
