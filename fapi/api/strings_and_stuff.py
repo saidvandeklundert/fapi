@@ -6,12 +6,6 @@ from pydantic import BaseModel
 
 router = fastapi.APIRouter()
 
-
-def background_word(word: str):
-    print(word)
-    time.sleep(8)
-
-
 # http://127.0.0.1/api/words/upper/{word}
 @router.get("/api/words/upper/{word}")
 def upper(word: str):
@@ -36,22 +30,14 @@ async def asyncword(word: str, second_word: str = "default"):
 
 
 # http://127.0.0.1/api/words/backgroundword/backgroundtask
-@router.post("/api/words/backgroundword/backgroundtask")
-async def backgroundword(
-    word: str, second_word: str, background_tasks: BackgroundTasks
-):
+@router.post("/api/words/backgroundword/{words}")
+async def backgroundword(words: str, background_tasks: BackgroundTasks):
 
-    background_tasks.add_task(background_word, word)
-    return f"{word} 2nd word {second_word}"
+    background_tasks.add_task(background_word, words)
+    return f"words are being written in the background"
 
 
-def write_notification(email: str, message=""):
-    with open("log.txt", mode="w") as email_file:
-        content = f"notification for {email}: {message}"
-        email_file.write(content)
-
-
-@router.post("/send-notification/{email}")
-async def send_notification(email: str, background_tasks: BackgroundTasks):
-    background_tasks.add_task(write_notification, email, message="some notification")
-    return {"message": "Notification sent in the background"}
+def background_word(words: str):
+    with open("/var/log/log.txt", mode="w") as words_file:
+        content = f"{words}"
+        words_file.write(content)
