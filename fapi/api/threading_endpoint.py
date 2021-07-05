@@ -6,8 +6,14 @@ import time
 
 router = fastapi.APIRouter()
 
+"""
+curl -X 'POST' \
+'http://127.0.0.1/api/threading/background/1' \
+-H 'accept: application/json'   -d ''
 
-# http://127.0.0.1/api/threading/background/word
+"""
+
+
 @router.post("/api/threading/background/{words}")
 async def backgroundword(words: str, background_tasks: BackgroundTasks):
     print("starting background task:")
