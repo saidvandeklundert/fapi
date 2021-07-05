@@ -2,6 +2,7 @@ import fastapi
 from fastapi import BackgroundTasks
 import time
 import asyncio
+from pydantic import BaseModel
 
 router = fastapi.APIRouter()
 
@@ -42,3 +43,20 @@ async def backgroundword(
 
     background_tasks.add_task(background_word, word)
     return f"{word} 2nd word {second_word}"
+
+
+def long_running(x):
+    print(f"sleep for {x} seconds")
+    time.sleep(x)
+    print("done sleeping")
+
+
+class Params(BaseModel):
+    sleep_time: int
+
+
+# http://127.0.0.1/api/words/words/bgtask/
+@router.post('"/api/words/bgtask/')
+def start_long_running(p: Params, bg_task: BackgroundTasks):
+    bg_task.add_task(long_running, p.sleep_time)
+    return {"message": "Queued task."}
