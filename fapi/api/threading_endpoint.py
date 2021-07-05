@@ -17,12 +17,12 @@ curl -X 'POST' \
 @router.post("/api/threading/background/{words}")
 async def backgroundword(words: str, background_tasks: BackgroundTasks):
     print("starting background task:")
-    background_tasks.add_task(background_word, words)
+    background_tasks.add_task(back_ground_func, words)
     return f"words are being written in the background"
 
 
-def background_word(words: str):
-    futures = example_threadpool()
+def back_ground_func(words: str):
+    futures = threading()
     s = ""
     for item in futures:
         s += item.result()
@@ -41,7 +41,7 @@ def io_bound_function(parameter):
     return parameter
 
 
-def example_threadpool():
+def threading():
     """
     Example where a function that requires an arg
      is passed to a ThreadPoolExecutor.
