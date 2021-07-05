@@ -45,18 +45,13 @@ async def backgroundword(
     return f"{word} 2nd word {second_word}"
 
 
-def long_running(x):
-    print(f"sleep for {x} seconds")
-    time.sleep(x)
-    print("done sleeping")
+def write_notification(email: str, message=""):
+    with open("log.txt", mode="w") as email_file:
+        content = f"notification for {email}: {message}"
+        email_file.write(content)
 
 
-class Params(BaseModel):
-    sleep_time: int
-
-
-# http://127.0.0.1/api/words/words/bgtask/
-@router.post("/api/words/bgtask/")
-def start_long_running(p: Params, bg_task: BackgroundTasks):
-    bg_task.add_task(long_running, p.sleep_time)
-    return {"message": "Queued task."}
+@router.post("/send-notification/{email}")
+async def send_notification(email: str, background_tasks: BackgroundTasks):
+    background_tasks.add_task(write_notification, email, message="some notification")
+    return {"message": "Notification sent in the background"}
