@@ -34,8 +34,8 @@ async def asyncword(word: str, second_word: str = "default"):
     return f"{word} 2nd word {second_word}"
 
 
-# http://127.0.0.1/api/words/backgrounword/{word}?second_word=secondword
-@router.post("/api/words/backgroundword/{word}")
+# http://127.0.0.1/api/words/backgroundword/backgroundtask
+@router.post("/api/words/backgroundword/backgroundtask")
 async def backgroundword(
     word: str, second_word: str, background_tasks: BackgroundTasks
 ):
