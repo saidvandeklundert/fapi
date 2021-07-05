@@ -14,7 +14,7 @@ curl -X 'POST' \
 
 
 @router.post("/api/threading/background/{word}")
-async def backgroundword(word: str, background_tasks: BackgroundTasks):
+async def api_that_runs_background_task(word: str, background_tasks: BackgroundTasks):
     print("starting background task:")
     background_tasks.add_task(back_ground_func, word)
     return f"words are being written in the background"
