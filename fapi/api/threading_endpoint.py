@@ -27,7 +27,7 @@ def background_word(words: str):
     for item in futures:
         s += item.result()
     with open("/var/log/log.txt", mode="a") as words_file:
-        content = f"{words} {s}"
+        content = f"{words} {s}\n"
         words_file.write(content)
 
 
