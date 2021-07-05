@@ -30,6 +30,16 @@ def back_ground_func(word: str):
         print(item)
 
 
+def threading(word: str):
+    futures = []
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        host_list = ["r1 ", "r2 ", "r3 ", "r4", "r5 ", "r6"]
+        for host in host_list:
+            futures.append(executor.submit(io_bound_function, host, word))
+
+    return futures
+
+
 def io_bound_function(host: str, word: str):
     """
     Simulates an IO-bound function using time.sleep(3).
@@ -41,13 +51,3 @@ def io_bound_function(host: str, word: str):
         words_file.write(content)
     print(f"io_bound_function against {host} with argument {word} ended")
     return True
-
-
-def threading(word: str):
-    futures = []
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        host_list = ["r1 ", "r2 ", "r3 ", "r4", "r5 ", "r6"]
-        for host in host_list:
-            futures.append(executor.submit(io_bound_function, host, word))
-
-    return futures
