@@ -2,7 +2,6 @@ import fastapi
 from fastapi import BackgroundTasks
 import time
 import asyncio
-from pydantic import BaseModel
 
 router = fastapi.APIRouter()
 
@@ -38,7 +37,7 @@ async def backgroundword(words: str, background_tasks: BackgroundTasks):
 
 
 def background_word(words: str):
+    time.sleep(30)
     with open("/var/log/log.txt", mode="w") as words_file:
         content = f"{words}"
         words_file.write(content)
-    time.sleep(30)
