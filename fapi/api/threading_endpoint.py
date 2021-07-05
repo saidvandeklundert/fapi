@@ -45,7 +45,7 @@ def io_bound_function(host: str, word: str):
 
 def threading(word: str):
     futures = []
-    with ThreadPoolExecutor(max_workers=3) as executor:
+    with ThreadPoolExecutor(max_workers=5) as executor:
         host_list = ["r1 ", "r2 ", "r3 ", "r4", "r5 ", "r6"]
         for host in host_list:
             futures.append(executor.submit(io_bound_function, host, word))
