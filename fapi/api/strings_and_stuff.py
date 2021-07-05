@@ -4,6 +4,15 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 import asyncio
 
+from pydantic.error_wrappers import ValidationError
+
+
+class ValidationError(Exception):
+    def __init__(self, error_msg: str, status_code: int):
+        super().__init__(error_msg)
+        self.status_code = status_code
+        self.error_msg = error_msg
+
 
 router = fastapi.APIRouter()
 
@@ -72,3 +81,26 @@ def example_threadpool():
             futures.append(executor.submit(io_bound_function, argument))
 
     return futures
+
+
+# http://127.0.0.1/api/words/correctword/{word}
+@router.get("/api/words/correctword/{word}")
+def correctword(word: str):
+    word = validate_word(word)
+    try:
+        return f"{word}"
+    except ValidationError as ve:
+        return fastapi.Response(content=ve.error_msg, status_code=ve.status_code)
+    except Exception as err:
+        return fastapi.Response(
+            content=f"ERROR PROCESSING YOUR REQUEST {err}", status_code=500
+        )
+
+
+def validate_word(word: str) -> str:
+
+    if word != "proper_word":
+        error = f"Invalid word: {word}. It must be 'proper_word'"
+        raise ValidationError(status_code=400, error_msg=error)
+
+    return word
