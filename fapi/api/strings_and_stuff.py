@@ -56,7 +56,7 @@ class Params(BaseModel):
 
 
 # http://127.0.0.1/api/words/words/bgtask/
-@router.post('"/api/words/bgtask/')
+@router.post("/api/words/bgtask/")
 def start_long_running(p: Params, bg_task: BackgroundTasks):
     bg_task.add_task(long_running, p.sleep_time)
     return {"message": "Queued task."}
