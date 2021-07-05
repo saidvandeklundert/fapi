@@ -41,3 +41,4 @@ def background_word(words: str):
     with open("/var/log/log.txt", mode="w") as words_file:
         content = f"{words}"
         words_file.write(content)
+    time.sleep(30)
