@@ -67,7 +67,7 @@ def example_threadpool():
 
     futures = []
     with ThreadPoolExecutor(max_workers=3) as executor:
-        argument_list = ["a", "b", "c"]
+        argument_list = ["this ", "will ", "appear ", "in ", "the ", "log"]
         for argument in argument_list:
             futures.append(executor.submit(io_bound_function, argument))
 
